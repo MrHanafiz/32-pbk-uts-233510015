@@ -1,30 +1,41 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+<div class="app-container">
+    <h1>My To-Do-List</h1>
+    <ul class="todo-list">
+      <li v-for="(todo, index) in filteredTodos" :key="index" class="todo-item">
+
+      </li>
+    </ul>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup>
+import { ref, computed } from 'vue'
+
+const todos = ref([])
+const newTodo = ref('')
+const filter = ref('all')
+
+const addTodo = () => {
+  if (newTodo.value.trim()) {
+    todos.value.push({ text: newTodo.value, done: false })
+    newTodo.value = ''
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+const removeTodo = (index) => {
+  todos.value.splice(index, 1)
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+
+const filteredTodos = computed(() => {
+  if (filter.value === 'active') {
+    return todos.value.filter(todo => !todo.done)
+  } else if (filter.value === 'done') {
+    return todos.value.filter(todo => todo.done)
+  }
+  return todos.value
+})
+</script>
+
+
