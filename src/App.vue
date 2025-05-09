@@ -1,6 +1,10 @@
 <template>
 <div class="app-container">
     <h1>My To-Do-List</h1>
+    <form @submit.prevent="addTodo" class="todo-form">
+      <input v-model="newTodo" placeholder="Bos, silahkan isi kegiatan anda" />
+      <button type="submit">Tambah</button>
+    </form>
     <ul class="todo-list">
       <li v-for="(todo, index) in filteredTodos" :key="index" class="todo-item">
 
