@@ -7,6 +7,8 @@
     </form>
     <ul class="todo-list">
       <li v-for="(todo, index) in filteredTodos" :key="index" class="todo-item">
+        <label class="checkbox-label">
+          <input type="checkbox" v-model="todo.done" />
         <button class="delete-button" @click="removeTodo(index)">🗑</button>
       </li>
     </ul>
