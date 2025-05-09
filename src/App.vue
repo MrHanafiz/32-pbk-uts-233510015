@@ -5,6 +5,11 @@
       <input v-model="newTodo" placeholder="Bos, silahkan isi kegiatan anda" />
       <button type="submit">Tambah</button>
     </form>
+    <div class="filter-buttons">
+      <button :class="{ active: filter === 'all' }" @click="filter = 'all'">Semua</button>
+      <button :class="{ active: filter === 'active' }" @click="filter = 'active'">Belum Selesai</button>
+      <button :class="{ active: filter === 'done' }" @click="filter = 'done'">Sudah Selesai</button>
+    </div>
     <ul class="todo-list">
       <li v-for="(todo, index) in filteredTodos" :key="index" class="todo-item">
         <label class="checkbox-label">
