@@ -7,7 +7,7 @@
     </form>
     <ul class="todo-list">
       <li v-for="(todo, index) in filteredTodos" :key="index" class="todo-item">
-
+        <button class="delete-button" @click="removeTodo(index)">🗑</button>
       </li>
     </ul>
   </div>
